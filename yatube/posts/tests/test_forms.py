@@ -83,7 +83,7 @@ class PostCreateFormTests(TestCase):
         """Комментировать посты может только авторизованный пользователь"""
         response = self.client.get(
             reverse("posts:post_detail",
-                    kwargs={"post_id": PostCreateFormTests.post.id})
+                    kwargs={"post_id": self.post.id})
         )
         self.assertNotContains(
             response=response,
