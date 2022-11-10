@@ -1,18 +1,16 @@
 import shutil
-
 import tempfile
 
-from django.core.cache import cache
-from django.test.utils import override_settings
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
-from django.urls import reverse
+from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
-
-from posts.models import Group, Post
+from django.test import Client, TestCase
+from django.test.utils import override_settings
+from django.urls import reverse
 
 from posts.forms import PostForm
+from posts.models import Group, Post
 
 User = get_user_model()
 
@@ -76,7 +74,6 @@ class PostCreateFormTests(TestCase):
         self.assertEqual(Post.objects.count(), posts_count + 1)
         self.assertTrue(
             Post.objects.filter(
-                text='Текс исходный',
                 group=self.group.id,
                 author=self.user,
                 image='posts/' + form_data['image'].name
